@@ -1,6 +1,7 @@
 # network test parameters
 
 region = ""
+user_secret_profile = ""
 ssh_access = []
 web_access = []
 key_name = ""

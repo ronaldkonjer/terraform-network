@@ -4,6 +4,8 @@
 
 provider "aws" {
   region = var.region
+  profile = var.user_secret_profile
+
 }
 
 data "aws_availability_zones" "current" {}
