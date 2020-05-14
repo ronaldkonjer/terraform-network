@@ -17,20 +17,20 @@ locals {
 
 
 resource "aws_eip" "nat_eips" {
-  count = local.az_count
+  count = 1
   vpc = true
 }
 
 resource "aws_eip" "bastion_eips" {
-  count = local.az_count
+  count = 1
   vpc = true
 }
 
 module "network" {
-  source = ".."
+  source = "./.."
   name = var.name
-  vpc_cidr = "172.16.0.0/20"
-  public_cidr_prefix = 28
+  vpc_cidr = "172.24.0.0/16"
+  public_cidr_prefix = 24
   private_cidr_prefix = 24
   availability_zones = local.az_list
   ssh_access = var.ssh_access

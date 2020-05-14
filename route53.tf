@@ -13,13 +13,13 @@ resource "aws_route53_zone" "dns" {
 }
 
 resource "aws_route53_record" "bastion" {
-  count   = local.az_count
+  count   = 1
   zone_id = aws_route53_zone.dns.*.zone_id[0]
   name    = aws_instance.bastion[count.index].tags["Name"]
   type    = "A"
   ttl     = var.dns_ttl
   records = [
-    aws_instance.bastion[count.index].private_ip,
+    element(aws_instance.bastion.*.private_ip, count.index)
   ]
 }
 

@@ -3,8 +3,8 @@
  */
 
 module "bastion-hostname" {
-  source           = "github.com/ronaldkonjer/terraform-hostname.git"
-  hcount            = local.az_count
+  source           = "git::https://github.com/ronaldkonjer/terraform-hostname.git"
+  hcount            = 1
   fqdns            = aws_route53_record.bastion.*.fqdn
   addresses        = data.aws_eip.bastion.*.public_ip
   user             = var.bastion_user

@@ -10,9 +10,8 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_nat_gateway" "nat-gw" {
-  count         = local.az_count
-  allocation_id = var.nat_eip_ids[count.index]
-  subnet_id     = aws_subnet.public[count.index].id
+  allocation_id = element(var.nat_eip_ids, 0)
+  subnet_id     = element(aws_subnet.public.*.id, 0)
   depends_on    = [aws_internet_gateway.igw]
   tags = {
     Name = var.name
