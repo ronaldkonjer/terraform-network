@@ -3,19 +3,20 @@
  */
 
 resource "null_resource" "setup-bastion" {
-  count = "${local.az_count}"
-  triggers {
-    bastion_id = "${element(aws_instance.bastion.*.id, count.index)}"
-    auth_keys = "${md5(local.authorized_keys)}"
-    hostname_id = "${md5(join(",", module.bastion-hostname.resource_ids))}"
+  count = local.az_count
+  triggers = {
+    bastion_id  = element(aws_instance.bastion.*.id, count.index)
+    auth_keys   = md5(local.authorized_keys)
+    hostname_id = md5(join(",", module.bastion-hostname.resource_ids))
   }
   connection {
-    host = "${data.aws_eip.bastion.*.public_ip[count.index]}"
-    user = "${var.bastion_user}"
-    private_key = "${local.private_key}"
+    host        = data.aws_eip.bastion[count.index].public_ip
+    user        = var.bastion_user
+    private_key = local.private_key
   }
   provisioner "file" {
-    content = "${local.authorized_keys}"
+    content     = local.authorized_keys
     destination = ".ssh/authorized_keys"
   }
 }
+
