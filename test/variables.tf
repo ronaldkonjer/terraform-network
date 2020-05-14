@@ -3,7 +3,7 @@
  */
 
 variable "region" {
-  type = "string"
+  type = string
 }
 
 variable "name" {
@@ -11,11 +11,11 @@ variable "name" {
 }
 
 variable "ssh_access" {
-  type = "list"
+  type = list(string)
 }
 
 variable "web_access" {
-  type = "list"
+  type = list(string)
 }
 
 variable "domain" {
@@ -23,21 +23,21 @@ variable "domain" {
 }
 
 variable "key_name" {
-  type = "string"
+  type = string
 }
 
 variable "private_key_path" {
-  type = "string"
+  type = string
 }
 
 variable "authorized_key_path" {
-  type = "string"
+  type = string
 }
 
 variable "bastion_ami" {
-  type = "string"
+  type = string
 }
 
 variable "bastion_user" {
-  type = "string"
+  type = string
 }
