@@ -5,8 +5,8 @@
 locals {
   vpc_cidr_elements        = [split("/", var.vpc_cidr)]
   vpc_cidr_prefix          = split("/", var.vpc_cidr)[1]
-  az_count                  = 3
-#  az_count                 = length(var.availability_zones)
+#  az_count                  = 3
+  az_count                 = length(var.availability_zones)
   min_prefix               = local.az_count == 1 ? 1 : local.az_count == 2 ? 2 : local.az_count <= 4 ? 3 : local.az_count <= 8 ? 4 : 5 + local.vpc_cidr_prefix
   public_cidr_prefix       = var.public_cidr_prefix == -1 ? local.min_prefix : var.public_cidr_prefix
   private_cidr_prefix      = var.private_cidr_prefix == -1 ? local.min_prefix : var.private_cidr_prefix

@@ -50,6 +50,7 @@ variable "web_access" {
 variable "dns_domain" {
   type        = string
   description = "private top level DNS domain (optional)"
+  default     = ""
 }
 
 variable "dns_ttl" {
